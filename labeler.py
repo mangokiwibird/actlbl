@@ -12,11 +12,19 @@ class MLBasedLabeler:
     history = []
 
     def append_keypoints_to_history(self, keypoints):
+        """
+        save frame to history
+        """
         if len(self.history) == 100:
             self.history.pop(0)
         self.history.append(np.array(keypoints).tolist()[0][0])
 
+    # TODO: implement
     def get_score(self, keypoints):
+        """
+        returns dictionary of [action - score]
+        """
+
         self.append_keypoints_to_history(keypoints)
 
         # model = Sequential([

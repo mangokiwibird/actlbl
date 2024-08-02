@@ -30,6 +30,10 @@ class CameraContext:
 
 
 class LabeledImage:
+    """
+    Image Object with helper functions
+    """
+    
     def __init__(self, image, camera_context: CameraContext):
         self.raw_image = image
         self.keypoints = model.parse_keypoints(image)

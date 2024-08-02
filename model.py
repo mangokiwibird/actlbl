@@ -21,6 +21,11 @@ KEYPOINT_INDEX = [
     'right_ankle'
 ]
 
+def filter_not(list_keypoints):
+    index = np.array(range(17))
+    index = np.delete(index, list(map(lambda x: KEYPOINT_DICT[x], list_keypoints)))
+    return index
+
 KEYPOINT_DICT = {
     'nose': 0,
     'left_eye': 1,
@@ -42,6 +47,10 @@ KEYPOINT_DICT = {
 }
 
 def load_model():
+    """
+    Loads Movenet
+    """
+
     global interpreter
 
     interpreter = tf.lite.Interpreter(model_path="./model/movenet_thunder.tflite")
