@@ -13,8 +13,22 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from camera import start_capture
-from movenet import load_model
+import os
 
-load_model()
-start_capture()
+
+def is_debug():
+    """Returns whether this project is run in debug mode
+
+    Returns:
+        Whether this project is run in debug mode, defaulting to False
+    """
+    return bool(os.environ.get("actlbl_dbg", "False"))
+
+
+def get_model_path():
+    """Returns movenet path
+
+    Returns:
+        Movenet Path specified in the environment variable, or a default movenet location
+    """
+    return str(os.environ.get("actlbl_movenet_path", "./model/movenet_thunder.tflite"))
