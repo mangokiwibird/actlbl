@@ -136,7 +136,7 @@ class LabeledImage:
                 (0, 255, 0))
 
     def get_activity(self):
-        pass
+        self.record_activity()
 
     def get_subactivity(self):
         pass
