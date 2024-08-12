@@ -42,28 +42,42 @@ def preprocess_image(
     return processed_image
 
 
-def start_capture():
+def start_local_capture():
+    local_camera = cv2.VideoCapture(0)
+    start_capture(local_camera)
+
+
+def start_fs_capture(video_path, target_path: str):
+    fs_capture = cv2.VideoCapture(video_path)
+    start_capture(fs_capture, target_path)
+
+
+def start_capture(video_source, target_path="data.json"):
     """Initiates the application loop
 
     Starts an infinite loop that accepts images from the local camera. LabeledImage instance
     is created every tick.
     """
 
-    local_camera = cv2.VideoCapture(0)
-    camera_context = CameraContext()
+    camera_context = CameraContext(target_path)
 
-    while True:
-        ret, frame = local_camera.read()
+    while video_source.isOpened():
+        try:
+            ret, frame = video_source.read()
 
-        labeled_image = LabeledImage(preprocess_image(frame), camera_context)
-        labeled_image.get_activity()
+            labeled_image = LabeledImage(preprocess_image(frame), camera_context)
+            labeled_image.get_activity()
 
-        camera_context.timer.tick_sec()  # increment timer tick
+            camera_context.timer.tick_sec()  # increment timer tick
 
-        cv2.imshow('frame', labeled_image.raw_image)
+            cv2.imshow('frame', labeled_image.raw_image)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        except Exception as error:
+            print(error)
+            # camera_context.ml_labeler.save_data()
             break
 
-    local_camera.release()
+    video_source.release()
     cv2.destroyAllWindows()

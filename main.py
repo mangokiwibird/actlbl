@@ -13,8 +13,8 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from camera import start_capture
+from camera import start_local_capture
 from movenet import load_model
 
 load_model()
-start_capture()
+start_local_capture()

@@ -18,7 +18,8 @@ import numpy as np
 
 import movenet
 
-from labeler import MLBasedLabeler
+from labeler.ml_based import MLBasedLabeler
+from labeler.rule_based import RuleBasedLabeler
 from timer import Timer
 
 
@@ -38,16 +39,18 @@ class CameraContext:
             Dictionary to save shared variables
     """
 
-    def __init__(self):
+    def __init__(self, data_target):
         """Initializes a new CameraContext object
 
         Initializes a new labeler, timer and an empty dictionary named "settings", which is used to
         save extra shared data.
         """
 
-        self.ml_labeler = MLBasedLabeler()
+        self.ml_labeler = MLBasedLabeler(data_target)
+        self.rule_based_labeler = RuleBasedLabeler()
         self.timer = Timer()
         self.settings = {}
+        self.data_target = data_target
         
         def start_record():
             self.settings["start_record"] = True
@@ -104,9 +107,12 @@ class LabeledImage:
 
         if "start_record" in self.camera_context.settings:
             if self.camera_context.settings["start_record"]:
-                self.camera_context.ml_labeler.get_score(self.keypoints)
+                # self.camera_context.ml_labeler.get_score(self.keypoints)
+                scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
+                print(scores)
             else:
-                self.camera_context.ml_labeler.save_data()
+                # self.camera_context.ml_labeler.save_data()
+                # self.camera_context.rule_based_labeler.save_data()
                 del self.camera_context.settings["start_record"]
 
         # adds keypoint marker to the raw image ( annotates image )
@@ -136,7 +142,11 @@ class LabeledImage:
                 (0, 255, 0))
 
     def get_activity(self):
-        self.record_activity()
+        # self.record_activity()
+
+        # scores = self.camera_context.ml_labeler.get_score(self.keypoints)
+        scores = self.camera_context.rule_based_labeler.get_score(self.keypoints[0][0])
+        print(scores)
 
     def get_subactivity(self):
         pass
