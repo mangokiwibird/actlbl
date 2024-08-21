@@ -1,6 +1,7 @@
 import os
 
 from camera import start_fs_capture
+from image import LabeledImage
 
 
 # TODO this code relies on the -ing suffix of an activity <sort of hardcoding?>
@@ -40,10 +41,14 @@ def classify_videos(directory: str):
 
 
 # TODO: remove hardcoding
-def train_from_local():
+def train_from_fs():
     video_map = classify_videos("dataset")
 
     for activity, video_paths in video_map.items():
         for video_path in video_paths:
             print(f"given: {activity}")
-            start_fs_capture(video_path, f"model/{activity}/{video_path.split("dataset\\")[1]}.json")
+
+            def callback(img: LabeledImage):
+                print(img.get_activity())
+
+            start_fs_capture(video_path, callback, target_path=f"model/{activity}/{video_path.split("dataset\\")[1]}.json")

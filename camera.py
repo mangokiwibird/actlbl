@@ -45,17 +45,13 @@ def preprocess_image(
     return processed_image
 
 
-def start_local_capture():
+def start_local_capture(callback: Callable[[LabeledImage], None]):
     local_camera = cv2.VideoCapture(0)
-    start_capture(local_camera)
+    start_capture(local_camera, callback)
 
 
-def start_fs_capture(video_path, target_path: str):
+def start_fs_capture(video_path, callback: Callable[[LabeledImage], None], target_path: str):
     fs_capture = cv2.VideoCapture(video_path)
-
-    def callback(img: LabeledImage):
-        print(img.get_activity())
-
     start_capture(fs_capture, callback, target_path=target_path)
 
 

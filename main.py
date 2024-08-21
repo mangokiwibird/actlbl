@@ -16,7 +16,8 @@ import argparse
 
 from camera import start_local_capture
 from movenet import load_model
-from training import train_from_local
+from fs_training import train_from_fs
+from local_training import train_from_local
 
 parser = argparse.ArgumentParser(
                     prog='ACTLBL',
@@ -34,8 +35,8 @@ print("Check settings.py for configuration")
 print("------------------")
 
 if args.record:
-    start_local_capture()
-elif args.test_model:
     train_from_local()
+elif args.test_model:
+    train_from_fs()
 else:
     print("No valid action passed. Possible options: --record or --test_model")
