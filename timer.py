@@ -32,6 +32,7 @@ class Timer:
         self.ticks_passed = 0
         self.registered_tasks = {}
 
+    # TODO: better naming
     def tick_sec(self):
         """Increase tick every second, executes registered action"""
 

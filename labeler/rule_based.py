@@ -59,8 +59,11 @@ class RuleBasedLabeler:
     def update_statistics(self, activity):
         activity_list = ["lying", "sitting", "standing", "walking", "running"]
 
-        if self.prevact in activity_list and activity in self.activity_statistics:
-            self.activity_statistics[activity_list.index(self.prevact)][activity_list.index(activity)] += 1
+        print(self.activity_statistics)
+        print(activity)
+
+        # if self.prevact in activity_list and activity in self.activity_statistics:
+        #     self.activity_statistics[activity_list.index(self.prevact)][activity_list.index(activity)] += 1
 
     def activity(self, keypoints, prevact):
         excluded_indices = [0, 1, 2, 3, 4, 7, 8, 9, 10]

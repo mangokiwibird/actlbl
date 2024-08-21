@@ -1,7 +1,6 @@
 import os
 
 from camera import start_fs_capture
-from movenet import load_model
 
 
 # TODO this code relies on the -ing suffix of an activity <sort of hardcoding?>
@@ -40,11 +39,11 @@ def classify_videos(directory: str):
     return list_videos
 
 
-video_map = classify_videos("dataset")
+# TODO: remove hardcoding
+def train_from_local():
+    video_map = classify_videos("dataset")
 
-load_model()
-
-for activity, video_paths in video_map.items():
-    for video_path in video_paths:
-        print(f"given: {activity}")
-        start_fs_capture(video_path, f"model/{activity}/{video_path.split("dataset\\")[1]}.json")
+    for activity, video_paths in video_map.items():
+        for video_path in video_paths:
+            print(f"given: {activity}")
+            start_fs_capture(video_path, f"model/{activity}/{video_path.split("dataset\\")[1]}.json")

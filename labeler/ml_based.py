@@ -62,7 +62,7 @@ class MLBasedLabeler:
         #     percentage = predicted_data[0] / np.sum(predicted_data[0])
         #     return { "꽁꽁": percentage[0], "얼어붙은": percentage[1], "한강위로": percentage[2], "고양이가": percentage[3], "걸어다닙니다": percentage[4] }
         # else:
-        return {"NO_DATA" : 1}
+        return {"NO_DATA": 1}
 
     def save_data(self):
         """Saves history data to json file"""

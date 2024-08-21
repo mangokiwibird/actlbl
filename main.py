@@ -12,9 +12,30 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import argparse
 
 from camera import start_local_capture
 from movenet import load_model
+from training import train_from_local
 
-load_model()
-start_local_capture()
+parser = argparse.ArgumentParser(
+                    prog='ACTLBL',
+                    description='Motion Parser for RnE')
+
+parser.add_argument('--record', type=bool, action='store_true')
+parser.add_argument("--test_model", type=bool, action="store_true")
+
+args = parser.parse_args()
+
+load_model()  # Load movenet model
+
+print("------NOTICE------")
+print("Check settings.py for configuration")
+print("------------------")
+
+if args.record:
+    start_local_capture()
+elif args.test_model:
+    train_from_local()
+else:
+    print("No valid action passed. Possible options: --record or --test_model")

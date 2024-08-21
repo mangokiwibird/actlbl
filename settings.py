@@ -32,3 +32,21 @@ def get_model_path():
         Movenet Path specified in the environment variable, or a default movenet location
     """
     return str(os.environ.get("actlbl_movenet_path", "./model/movenet_thunder.tflite"))
+
+
+def get_mjpeg_port():
+    """Returns mjpeg server port
+
+    Returns:
+        Set MJPEG server port, or a default port
+    """
+    return int(os.environ.get("actlbl_mjpeg_port", "8080"))
+
+
+def get_mjpeg_channel_name():
+    """Returns mjpeg server port
+
+    Returns:
+        Set MJPEG server port, or a default port
+    """
+    return int(os.environ.get("actlbl_mjpeg_channel_name", "my_camera"))
