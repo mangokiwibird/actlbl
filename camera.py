@@ -93,6 +93,7 @@ def start_capture(video_source, on_frame: Callable[[LabeledImage], None], target
             break
 
     # server.stop()
+    # TODO: MJPEG server stops the whole program when the stop method is called
 
     video_source.release()
     cv2.destroyAllWindows()
