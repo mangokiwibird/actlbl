@@ -20,9 +20,9 @@ def is_debug():
     """Returns whether this project is run in debug mode
 
     Returns:
-        Whether this project is run in debug mode, defaulting to False
+        Whether this project is run in debug mode, defaulting to True
     """
-    return bool(os.environ.get("actlbl_dbg", "False"))
+    return bool(os.environ.get("actlbl_dbg", "True"))
 
 
 def get_model_path():
@@ -49,4 +49,20 @@ def get_mjpeg_channel_name():
     Returns:
         Set MJPEG server port, or a default port
     """
-    return int(os.environ.get("actlbl_mjpeg_channel_name", "my_camera"))
+    return str(os.environ.get("actlbl_mjpeg_channel_name", "my_camera"))
+
+
+def get_target_model_path():
+    """Returns target model path to save after training
+
+    Returns:
+        Set target model path, or a default path
+    """
+
+    return str(os.environ.get("actlbl_target_model_path", "./model/actlbl_model.keras"))
+
+
+def get_frames_per_sample():
+    """Frames per sample, defaults to 25"""
+
+    return int(os.environ.get("actlbl_frames_per_sample", "25"))

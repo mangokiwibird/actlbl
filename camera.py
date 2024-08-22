@@ -47,52 +47,54 @@ def preprocess_image(
 
 def start_local_capture(callback: Callable[[LabeledImage], None]):
     local_camera = cv2.VideoCapture(0)
-    start_capture(local_camera, callback)
+    return start_capture(local_camera, callback)
 
 
-def start_fs_capture(video_path, callback: Callable[[LabeledImage], None], target_path: str):
+def start_fs_capture(video_path, callback: Callable[[LabeledImage], None], target_path: str, model_path: str = None):
     fs_capture = cv2.VideoCapture(video_path)
-    start_capture(fs_capture, callback, target_path=target_path)
+    return start_capture(fs_capture, callback, target_path=target_path, model_path=model_path)
 
 
 # TODO: fix error when using mp4 files as video source
-def start_capture(video_source, on_frame: Callable[[LabeledImage], None], target_path="data.json"):
+def start_capture(video_source, on_frame: Callable[[LabeledImage], None], target_path="data.json", model_path=None):
     """Initiates the application loop
 
     Starts an infinite loop that accepts images from the local camera. LabeledImage instance
     is created every tick.
     """
 
-    camera_context = CameraContext(target_path)
+    camera_context = CameraContext(target_path, model_path=model_path)
 
     # Initialize MJPEG Server
     # TODO: move to a separate function
-    stream = Stream(settings.get_mjpeg_channel_name(), size=(256, 256), quality=50, fps=30)
-    server = MjpegServer("localhost", settings.get_mjpeg_port())
-    server.add_stream(stream)
-    server.start()
+    # stream = Stream(settings.get_mjpeg_channel_name(), size=(256, 256), quality=50, fps=30)
+    # server = MjpegServer("localhost", settings.get_mjpeg_port())
+    # server.add_stream(stream)
+    # server.start()
 
     while video_source.isOpened():
-        # try:
-        ret, frame = video_source.read()
+        try:
+            ret, frame = video_source.read()
 
-        labeled_image = LabeledImage(preprocess_image(frame), camera_context)
-        on_frame(labeled_image)
+            labeled_image = LabeledImage(preprocess_image(frame), camera_context)
+            on_frame(labeled_image)
 
-        camera_context.timer.tick_sec()  # increment timer tick
+            camera_context.timer.tick_sec()  # increment timer tick
 
-        cv2.imshow('frame', labeled_image.raw_image)
+            cv2.imshow('frame', labeled_image.raw_image)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+            # stream.set_frame(labeled_image.raw_image)
+        except Exception as error:
+            print(error)
+            camera_context.ml_labeler.save_data()
             break
 
-        stream.set_frame(labeled_image.raw_image)
-        # except Exception as error:
-        #     print(error)
-        # camera_context.ml_labeler.save_data()
-        # break
-
-    server.stop()
+    # server.stop()
 
     video_source.release()
     cv2.destroyAllWindows()
+
+    return camera_context

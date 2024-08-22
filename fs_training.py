@@ -1,5 +1,6 @@
 import os
 
+import settings
 from camera import start_fs_capture
 from image import LabeledImage
 
@@ -40,15 +41,36 @@ def classify_videos(directory: str):
     return list_videos
 
 
+def test_from_fs(video_path, model_path):
+    def callback(img: LabeledImage):
+        img.get_activity()
+        if "counter" in img.camera_context.settings:
+            img.camera_context.settings.counter += 1
+        else:
+            img.camera_context.settings.counter = 1
+
+    ctx = start_fs_capture(video_path, callback, target_path="model_test_results.json", model_path=model_path)
+
+    if settings.is_debug():
+        print(f"Frames in current video: {ctx.settings.get("counter")}")
+
+
 # TODO: remove hardcoding
-def train_from_fs():
-    video_map = classify_videos("dataset")
+def record_from_fs(dataset_directory="dataset"):
+    video_map = classify_videos(dataset_directory)
 
     for activity, video_paths in video_map.items():
         for video_path in video_paths:
             print(f"given: {activity}")
 
             def callback(img: LabeledImage):
-                print(img.get_activity())
+                img.record_activity()
+                if "counter" in img.camera_context.settings:
+                    img.camera_context.settings["counter"] += 1
+                else:
+                    img.camera_context.settings["counter"] = 1
 
-            start_fs_capture(video_path, callback, target_path=f"model/{activity}/{video_path.split("dataset\\")[1]}.json")
+            ctx = start_fs_capture(video_path, callback, target_path=f"model/{activity}/{video_path.split("dataset\\")[1]}.json")
+
+            if settings.is_debug():
+                print(f"Frames in current video: {ctx.settings.get("counter")}")

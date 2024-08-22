@@ -39,15 +39,15 @@ class CameraContext:
             Dictionary to save shared variables
     """
 
-    def __init__(self, data_target):
+    def __init__(self, data_target, model_path: str = None):
         """Initializes a new CameraContext object
 
         Initializes a new labeler, timer and an empty dictionary named "settings", which is used to
         save extra shared data.
         """
 
-        self.ml_labeler = MLBasedLabeler(data_target)
-        self.rule_based_labeler = RuleBasedLabeler()
+        self.ml_labeler = MLBasedLabeler(data_target, model_path=model_path)
+        # self.rule_based_labeler = RuleBasedLabeler() # TODO: re
         self.timer = Timer()
         self.settings = {}
         self.data_target = data_target
@@ -107,11 +107,11 @@ class LabeledImage:
 
         if "start_record" in self.camera_context.settings:
             if self.camera_context.settings["start_record"]:
-                # self.camera_context.ml_labeler.get_score(self.keypoints)
-                scores = self.camera_context.rule_based_labeler.save_frame(self.keypoints)
+                scores = self.camera_context.ml_labeler.save_frame(self.keypoints)
+                # scores = self.camera_context.rule_based_labeler.save_frame(self.keypoints)
                 print(scores)
             else:
-                # self.camera_context.ml_labeler.save_data()
+                self.camera_context.ml_labeler.save_data()
                 # self.camera_context.rule_based_labeler.save_data()
                 del self.camera_context.settings["start_record"]
 
@@ -143,9 +143,9 @@ class LabeledImage:
 
     def get_activity(self):
         # self.record_activity()
-
-        # scores = self.camera_context.ml_labeler.get_score(self.keypoints)
-        scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
+        self.camera_context.ml_labeler.save_frame(self.keypoints)
+        scores = self.camera_context.ml_labeler.get_score(self.keypoints)
+        # scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
         print(scores)
 
     def get_subactivity(self):

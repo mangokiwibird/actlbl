@@ -21,6 +21,8 @@ from movenet import KEYPOINT_LEFT_HIP, KEYPOINT_RIGHT_HIP, KEYPOINT_LEFT_ANKLE, 
 
 
 class RuleBasedLabeler(Labeler):
+    def save_data(self):
+        raise Exception("Unimplemented")
 
     history = []
     probability_history = []

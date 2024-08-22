@@ -16,10 +16,12 @@
 import json
 
 import numpy as np
-
-from labeler.common import Labeler
-from labeler.ml_model import preprocess_data, train_labeler
 import tensorflow as tf
+import settings
+from labeler.common import Labeler
+from labeler.ml_model import train_labeler, preprocess_data
+
+FRAMES_PER_SAMPLE = settings.get_frames_per_sample()
 
 
 class MLBasedLabeler(Labeler):
@@ -33,28 +35,31 @@ class MLBasedLabeler(Labeler):
 
     history = []
 
-    def __init__(self, data_target: str):
+    def __init__(self, data_target: str, model_path: str = None):
         """
         Initializer
 
         Args:
             data_target: filename target to save json data
         """
-        # self.model = tf.keras.models.load_model('model/hangang_cat.keras')
-        # self.model = train_labeler()
+
         self.data_target = data_target
+
+        # if model_path is not None:
+        #     self.model = tf.keras.models.load_model(model_path)
+        # else:
+        #     self.model = train_labeler()
 
     # TODO: implement
     def get_score(self, keypoints):
         """Returns dictionary of [action - score]"""
 
-        # flattened_train_data = np.zeros((1, 22 * 25, 1))  # TODO: remove hardcoding
-        # if len(self.history) >= 25:
-        #     flattened_train_data[0, :, 0] = preprocess_data(np.array(self.history)[:25]).flatten()
-        #     predicted_data = self.model.predict(flattened_train_data, verbose=0)
-        #     percentage = predicted_data[0] / np.sum(predicted_data[0])
-        #     return { "꽁꽁": percentage[0], "얼어붙은": percentage[1], "한강위로": percentage[2], "고양이가": percentage[3], "걸어다닙니다": percentage[4] }
-        # else:
+        flattened_train_data = np.zeros((1, 34 * FRAMES_PER_SAMPLE, 1))  # TODO: remove hardcoding
+        if len(self.history) <= FRAMES_PER_SAMPLE:
+            return {"NO_DATA": 1}
+
+        flattened_train_data[0, :, 0] = preprocess_data(np.array(self.history)[-FRAMES_PER_SAMPLE:]).flatten()
+        self.model.predict(flattened_train_data, verbose=0)
 
         return {"NO_DATA": 1}
 
@@ -67,11 +72,14 @@ class MLBasedLabeler(Labeler):
                 Keypoints parsed by movenet
         """
 
+        if len(self.history) == 100:  # TODO: remove hardcoding
+            self.history.pop(0)
+
         self.history.append(keypoints)
 
     def save_data(self):
         """Saves history data to json file"""
 
         with open(self.data_target, "w") as outfile:
-            json.dump({"history": self.history}, outfile)
+            json.dump({"history": np.array(self.history[-FRAMES_PER_SAMPLE:]).tolist()}, outfile)
             print("successfully saved data to file")

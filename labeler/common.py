@@ -10,5 +10,8 @@ class Labeler:
     def save_frame(self, keypoints):
         pass
 
+    @abstractmethod
+    def save_data(self):
+        pass
 
 

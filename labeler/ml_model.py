@@ -16,7 +16,7 @@
 import json
 import os
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 from tensorflow.keras import Sequential
@@ -24,11 +24,12 @@ from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropou
 from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import MultiLabelBinarizer
 
+import settings
 from settings import is_debug
-from movenet import filter_not
+# from movenet import filter_not
 
 FRAME_PER_DATA = 25  # Frame refers to a single movenet keypoints list
-TIME_STEPS = 22 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
+TIME_STEPS = 34 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
 N_FEATURES = 1
 
 
@@ -42,8 +43,8 @@ def preprocess_data(history: np.ndarray):
             Processed history data
     """
 
-    filtered_indices = filter_not(['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist'])
-    history = np.delete(history, filtered_indices, axis=1)
+    # filtered_indices = filter_not(['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist'])
+    # history = np.delete(history, filtered_indices, axis=1)
     history = np.delete(history, [2], axis=2)
 
     return history
@@ -103,7 +104,7 @@ def train_labeler():
         # TODO: currently flattened all x, y coordinates for Conv1D -> Use Conv2D?
         flattened_train_data[i, :, 0] = d.flatten()
 
-    X_train, X_test, y_train, y_test = train_test_split(
+    x_train, x_test, y_train, y_test = train_test_split(
         flattened_train_data,
         labels_for_training,
         test_size=0.3,
@@ -118,33 +119,37 @@ def train_labeler():
         Flatten(),
         Dense(50, activation='relu'),
         Dropout(0.5),
-        Dense(5, activation='sigmoid')
+        Dense(5, activation='softmax')
     ])
 
-    model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    history = model.fit(X_train, y_train, epochs=500, batch_size=64, validation_data=(X_test, y_test))
+    history = model.fit(x_train, y_train, epochs=500, batch_size=64, validation_data=(x_test, y_test))
 
     if is_debug():
-        plt.figure(figsize=(12, 4))
-        plt.subplot(1, 2, 1)
-        plt.plot(history.history['accuracy'])
-        plt.plot(history.history['val_accuracy'])
-        plt.title('Model accuracy')
-        plt.ylabel('Accuracy')
-        plt.xlabel('Epoch')
-        plt.legend(['Train', 'Test'], loc='upper left')
+        print(history.history["accuracy"])
+        print(history.history["val_accuracy"])
+        print(history.history["loss"])
+        print(history.history["val_loss"])
+        # plt.figure(figsize=(12, 4))
+        # plt.subplot(1, 2, 1)
+        # plt.plot(history.history['accuracy'])
+        # plt.plot(history.history['val_accuracy'])
+        # plt.title('Model accuracy')
+        # plt.ylabel('Accuracy')
+        # plt.xlabel('Epoch')
+        # plt.legend(['Train', 'Test'], loc='upper left')
+        #
+        # plt.subplot(1, 2, 2)
+        # plt.plot(history.history['loss'])
+        # plt.plot(history.history['val_loss'])
+        # plt.title('Model loss')
+        # plt.ylabel('Loss')
+        # plt.xlabel('Epoch')
+        # plt.legend(['Train', 'Test'], loc='upper left')
+        # plt.tight_layout()
+        # plt.show()
 
-        plt.subplot(1, 2, 2)
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title('Model loss')
-        plt.ylabel('Loss')
-        plt.xlabel('Epoch')
-        plt.legend(['Train', 'Test'], loc='upper left')
-        plt.tight_layout()
-        plt.show()
-
-    model.save("./model/hangang_cat.keras")
+    model.save(settings.get_target_model_path())
 
     return model
