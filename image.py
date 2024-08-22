@@ -98,7 +98,7 @@ class LabeledImage:
 
         self.raw_image = image
         self.camera_context = camera_context
-        self.keypoints = movenet.parse_keypoints(image)
+        self.keypoints = movenet.parse_keypoints(image)[0][0]
 
     def record_activity(self):
         """Records activity into json file format"""
@@ -108,7 +108,7 @@ class LabeledImage:
         if "start_record" in self.camera_context.settings:
             if self.camera_context.settings["start_record"]:
                 # self.camera_context.ml_labeler.get_score(self.keypoints)
-                scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
+                scores = self.camera_context.rule_based_labeler.save_frame(self.keypoints)
                 print(scores)
             else:
                 # self.camera_context.ml_labeler.save_data()
@@ -116,7 +116,7 @@ class LabeledImage:
                 del self.camera_context.settings["start_record"]
 
         # adds keypoint marker to the raw image ( annotates image )
-        for keypoint_index, keypoint_data in enumerate(self.keypoints[0][0]):
+        for keypoint_index, keypoint_data in enumerate(self.keypoints):
             movenet_confidence = keypoint_data[2]
             if movenet_confidence < 0.1:
                 continue
@@ -145,7 +145,7 @@ class LabeledImage:
         # self.record_activity()
 
         # scores = self.camera_context.ml_labeler.get_score(self.keypoints)
-        scores = self.camera_context.rule_based_labeler.get_score(self.keypoints[0][0])
+        scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
         print(scores)
 
     def get_subactivity(self):

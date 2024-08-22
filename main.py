@@ -14,7 +14,6 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import argparse
 
-from camera import start_local_capture
 from movenet import load_model
 from fs_training import train_from_fs
 from local_training import train_from_local

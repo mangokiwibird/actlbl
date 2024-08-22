@@ -15,11 +15,13 @@
 
 import numpy as np
 
+from labeler.common import Labeler
 from movenet import KEYPOINT_LEFT_HIP, KEYPOINT_RIGHT_HIP, KEYPOINT_LEFT_ANKLE, \
     KEYPOINT_RIGHT_ANKLE, KEYPOINT_LEFT_SHOULDER, KEYPOINT_RIGHT_SHOULDER
 
 
-class RuleBasedLabeler:
+class RuleBasedLabeler(Labeler):
+
     history = []
     probability_history = []
 
@@ -116,6 +118,9 @@ class RuleBasedLabeler:
                 return "walking"
             return "standing"
         return "really nothing???"
+
+    def save_frame(self, keypoints):
+        pass
 
     def get_score(self, keypoints):
         self.append_keypoints_to_history(keypoints)
