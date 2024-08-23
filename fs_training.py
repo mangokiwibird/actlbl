@@ -3,6 +3,7 @@ import os
 import settings
 from camera import start_fs_capture
 from image import LabeledImage
+from labeler.ml_model import load_dataset, train_labeler
 
 
 # TODO this code relies on the -ing suffix of an activity <sort of hardcoding?>
@@ -39,6 +40,18 @@ def classify_videos(directory: str):
         list_videos[video_activity].append(full_path)
 
     return list_videos
+
+
+def generate_model_fs():
+    classified_history = [
+        load_dataset("./model/running"),
+        load_dataset("./model/lying"),
+        load_dataset("./model/walking"),
+        load_dataset("./model/sitting"),
+        load_dataset("./model/standing")
+    ]
+
+    train_labeler(classified_history)
 
 
 def test_from_fs(video_path, model_path):

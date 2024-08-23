@@ -18,8 +18,8 @@ import numpy as np
 
 import movenet
 
+from frame_loader import FrameLoader
 from labeler.ml_based import MLBasedLabeler
-from labeler.rule_based import RuleBasedLabeler
 from timer import Timer
 
 
@@ -47,7 +47,6 @@ class CameraContext:
         """
 
         self.ml_labeler = MLBasedLabeler(data_target, model_path=model_path)
-        # self.rule_based_labeler = RuleBasedLabeler() # TODO: re
         self.timer = Timer()
         self.settings = {}
         self.data_target = data_target
@@ -107,12 +106,9 @@ class LabeledImage:
 
         if "start_record" in self.camera_context.settings:
             if self.camera_context.settings["start_record"]:
-                scores = self.camera_context.ml_labeler.save_frame(self.keypoints)
-                # scores = self.camera_context.rule_based_labeler.save_frame(self.keypoints)
-                print(scores)
+                self.camera_context.ml_labeler.save_frame(self.keypoints)
             else:
                 self.camera_context.ml_labeler.save_data()
-                # self.camera_context.rule_based_labeler.save_data()
                 del self.camera_context.settings["start_record"]
 
         # adds keypoint marker to the raw image ( annotates image )
@@ -143,10 +139,10 @@ class LabeledImage:
 
     def get_activity(self):
         # self.record_activity()
-        self.camera_context.ml_labeler.save_frame(self.keypoints)
-        scores = self.camera_context.ml_labeler.get_score(self.keypoints)
+        # self.camera_context.ml_labeler.save_frame(self.keypoints) # TODO re
+        # scores = self.camera_context.ml_labeler.get_score(self.keypoints) # TODO re
         # scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
-        print(scores)
+        print("nothing bro!")
 
     def get_subactivity(self):
         pass

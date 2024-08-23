@@ -29,7 +29,7 @@ from settings import is_debug
 # from movenet import filter_not
 
 FRAME_PER_DATA = 25  # Frame refers to a single movenet keypoints list
-TIME_STEPS = 34 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
+TIME_STEPS = 51 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
 N_FEATURES = 1
 
 
@@ -45,7 +45,7 @@ def preprocess_data(history: np.ndarray):
 
     # filtered_indices = filter_not(['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist'])
     # history = np.delete(history, filtered_indices, axis=1)
-    history = np.delete(history, [2], axis=2)
+    # history = np.delete(history, [2], axis=2)  # TODO: remove confidence?
 
     return history
 
@@ -78,15 +78,7 @@ def load_dataset(directory: str):
     return list_dataset
 
 
-def train_labeler():
-    classified_history = [
-        load_dataset("./model/꽁꽁"),
-        load_dataset("./model/얼어붙은"),
-        load_dataset("./model/한강위로"),
-        load_dataset("./model/고양이가"),
-        load_dataset("./model/걸어다닙니다")
-    ]
-
+def train_labeler(classified_history):
     labels = [group_id for (group_id, history_group) in enumerate(classified_history) for history in history_group]
     mlb = MultiLabelBinarizer()
     labels_for_training = mlb.fit_transform(np.array(labels).reshape(-1, 1))
@@ -94,7 +86,7 @@ def train_labeler():
     # Limits history size to frame_per_data for the consistency of data size
     raw_train_data = \
         np.array(
-            [np.array(history[:FRAME_PER_DATA]) for history_group in classified_history for history in history_group])
+            [np.array(history[-FRAME_PER_DATA:]) for history_group in classified_history for history in history_group])
 
     n_samples = len(raw_train_data)
 

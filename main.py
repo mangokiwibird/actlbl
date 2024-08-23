@@ -15,7 +15,7 @@
 import argparse
 
 from movenet import load_model
-from fs_training import record_from_fs, test_from_fs
+from fs_training import record_from_fs, test_from_fs, generate_model_fs
 from local_training import record_from_local
 
 parser = argparse.ArgumentParser(
@@ -26,6 +26,7 @@ parser.add_argument('--record_live', action='store_true')
 parser.add_argument("--test_model", action="store_true")
 parser.add_argument("--record_from_mp4", action="store_true")
 parser.add_argument('--test_from_mp4', action='store_true')
+parser.add_argument('--generate_model', action='store_true')
 parser.add_argument('--video_path', type=str)
 parser.add_argument('--model_path', type=str)
 
@@ -41,6 +42,8 @@ if args.test_from_mp4 and args.video_path and args.model_path:
     test_from_fs(args.video_path, args.model_path)
 elif args.record_from_mp4 and args.video_path:
     record_from_fs(args.video_path)
+elif args.generate_model:
+    generate_model_fs()
 elif args.record_live:
     record_from_local()
 elif args.test_model:

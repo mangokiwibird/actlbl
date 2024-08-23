@@ -1,17 +1,9 @@
 from abc import abstractmethod
 
+from frame_loader import FrameLoader
 
-class Labeler:
+
+class Labeler(FrameLoader):
     @abstractmethod
     def get_score(self, keypoints):
         pass
-
-    @abstractmethod
-    def save_frame(self, keypoints):
-        pass
-
-    @abstractmethod
-    def save_data(self):
-        pass
-
-

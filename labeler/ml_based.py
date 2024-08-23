@@ -18,6 +18,7 @@ import json
 import numpy as np
 import tensorflow as tf
 import settings
+from frame_loader import FrameLoader
 from labeler.common import Labeler
 from labeler.ml_model import train_labeler, preprocess_data
 
@@ -25,36 +26,33 @@ FRAMES_PER_SAMPLE = settings.get_frames_per_sample()
 
 
 class MLBasedLabeler(Labeler):
-    """
-    Labels activity using keypoints parsed by movenet.
+    """Labels activity using keypoints parsed by movenet."""
 
-    Attributes:
-        history:
-            A list of past keypoints. Stacks up to 100, and discards the oldest keypoint after that.
-    """
-
-    history = []
-
-    def __init__(self, data_target: str, model_path: str = None):
-        """
-        Initializer
+    def __init__(self, data_target: str, classified_history=None, model_path: str = None):
+        """Initializer
 
         Args:
             data_target: filename target to save json data
+            model_path: path of keras model
+            classified_history: Data to feed
         """
 
-        self.data_target = data_target
+        super().__init__(data_target)
 
-        # if model_path is not None:
-        #     self.model = tf.keras.models.load_model(model_path)
-        # else:
-        #     self.model = train_labeler()
+        if model_path is not None:
+            self.model = tf.keras.models.load_model(model_path)
+        elif classified_history is not None:
+            self.model = train_labeler(classified_history)
+        else:
+            self.model = None
 
     # TODO: implement
     def get_score(self, keypoints):
         """Returns dictionary of [action - score]"""
+        if self.model is None:
+            raise Exception("Invalid Model. No data fed.")
 
-        flattened_train_data = np.zeros((1, 34 * FRAMES_PER_SAMPLE, 1))  # TODO: remove hardcoding
+        flattened_train_data = np.zeros((1, 51 * FRAMES_PER_SAMPLE, 1))  # TODO: remove hardcoding
         if len(self.history) <= FRAMES_PER_SAMPLE:
             return {"NO_DATA": 1}
 
@@ -62,24 +60,3 @@ class MLBasedLabeler(Labeler):
         self.model.predict(flattened_train_data, verbose=0)
 
         return {"NO_DATA": 1}
-
-    def save_frame(self, keypoints):
-        """
-        Saves keypoints to history
-
-        Args:
-            keypoints:
-                Keypoints parsed by movenet
-        """
-
-        if len(self.history) == 100:  # TODO: remove hardcoding
-            self.history.pop(0)
-
-        self.history.append(keypoints)
-
-    def save_data(self):
-        """Saves history data to json file"""
-
-        with open(self.data_target, "w") as outfile:
-            json.dump({"history": np.array(self.history[-FRAMES_PER_SAMPLE:]).tolist()}, outfile)
-            print("successfully saved data to file")
