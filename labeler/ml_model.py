@@ -28,7 +28,7 @@ import settings
 from settings import is_debug
 # from movenet import filter_not
 
-FRAME_PER_DATA = 25  # Frame refers to a single movenet keypoints list
+FRAME_PER_DATA = settings.get_frames_per_sample()  # Frame refers to a single movenet keypoints list
 TIME_STEPS = 51 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
 N_FEATURES = 1
 
@@ -84,9 +84,12 @@ def train_labeler(classified_history):
     labels_for_training = mlb.fit_transform(np.array(labels).reshape(-1, 1))
 
     # Limits history size to frame_per_data for the consistency of data size
-    raw_train_data = \
-        np.array(
-            [np.array(history[-FRAME_PER_DATA:]) for history_group in classified_history for history in history_group])
+    raw_train_data = np.array([])
+
+    for history_group in classified_history:
+        for history in history_group:
+            print(len(history[-FRAME_PER_DATA]))
+            np.append(raw_train_data, np.array(history[-FRAME_PER_DATA:]))
 
     n_samples = len(raw_train_data)
 

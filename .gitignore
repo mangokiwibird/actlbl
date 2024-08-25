@@ -3,3 +3,4 @@ __pycache__
 venv
 data.json
 dataset/*.mp4
+test_dataset/*.mp4

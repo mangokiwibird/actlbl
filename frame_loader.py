@@ -39,5 +39,5 @@ class FrameLoader:
         """Saves history data to json file"""
 
         with open(self.data_target, "w") as outfile:
-            json.dump({"history": np.array(self.history[-FRAMES_PER_SAMPLE:]).tolist()}, outfile)
+            json.dump({"history": np.array(self.history).tolist()}, outfile)
             print("successfully saved data to file")

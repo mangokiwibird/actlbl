@@ -72,6 +72,8 @@ def test_from_fs(video_path, model_path):
 def record_from_fs(dataset_directory="dataset"):
     video_map = classify_videos(dataset_directory)
 
+    min_frames = 10000
+
     for activity, video_paths in video_map.items():
         for video_path in video_paths:
             print(f"given: {activity}")
@@ -86,4 +88,11 @@ def record_from_fs(dataset_directory="dataset"):
             ctx = start_fs_capture(video_path, callback, target_path=f"model/{activity}/{video_path.split("dataset\\")[1]}.json")
 
             if settings.is_debug():
-                print(f"Frames in current video: {ctx.settings.get("counter")}")
+                current_frames = int(ctx.settings.get("counter"))
+
+                if min_frames > current_frames:
+                    min_frames = current_frames
+                print(f"Frames in current video: {current_frames}")
+
+    print(f"Min Frames: {min_frames}")
+
