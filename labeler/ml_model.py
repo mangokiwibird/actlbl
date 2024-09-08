@@ -16,16 +16,20 @@
 import json
 import os
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from keras.src.layers import Masking
 from sklearn.model_selection import train_test_split
 
+import tensorflow as tf
+
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout, Input
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout, Input, Embedding
 from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import MultiLabelBinarizer
 
 import settings
 from settings import is_debug
+
 # from movenet import filter_not
 
 FRAME_PER_DATA = settings.get_frames_per_sample()  # Frame refers to a single movenet keypoints list
@@ -72,9 +76,10 @@ def load_dataset(directory: str):
             history = np.array(history)
 
             history = preprocess_data(history)
+            print(f"{json_full_path} : {len(history)}")
 
             list_dataset.append(history)
-    
+
     return list_dataset
 
 
@@ -84,20 +89,32 @@ def train_labeler(classified_history):
     labels_for_training = mlb.fit_transform(np.array(labels).reshape(-1, 1))
 
     # Limits history size to frame_per_data for the consistency of data size
-    raw_train_data = np.array([])
+    raw_train_data = []
 
     for history_group in classified_history:
         for history in history_group:
-            print(len(history[-FRAME_PER_DATA]))
-            np.append(raw_train_data, np.array(history[-FRAME_PER_DATA:]))
+            # TODO: find a way to track in which file the error has occurred
+            # TODO: maybe add a tag? in the classified_history array
+
+            # print(len(history[-FRAME_PER_DATA:]))
+            print(len(history))
+            raw_train_data.append(np.array(history[-FRAME_PER_DATA:]))
+
+    raw_train_data = np.array(raw_train_data)
 
     n_samples = len(raw_train_data)
+    print()
 
     # Conform to Conv1D input format
     flattened_train_data = np.zeros((n_samples, TIME_STEPS, N_FEATURES))
     for i, d in enumerate(raw_train_data):
         # TODO: currently flattened all x, y coordinates for Conv1D -> Use Conv2D?
+        # TODO: include the confidence data into the training dataset
+
         flattened_train_data[i, :, 0] = d.flatten()
+
+    print("seriously?")
+    print(flattened_train_data)
 
     x_train, x_test, y_train, y_test = train_test_split(
         flattened_train_data,
@@ -111,8 +128,14 @@ def train_labeler(classified_history):
         Dropout(0.5),
         Conv1D(filters=64, kernel_size=5, activation='relu'),
         MaxPooling1D(pool_size=2),
+        Dropout(0.5),
+        Conv1D(filters=64, kernel_size=5, activation='relu'),
+        MaxPooling1D(pool_size=2),
         Flatten(),
         Dense(50, activation='relu'),
+        Dropout(0.5),
+        Dense(25, activation='relu'),
+        Dense(12, activation='relu'),
         Dropout(0.5),
         Dense(5, activation='softmax')
     ])
@@ -122,28 +145,28 @@ def train_labeler(classified_history):
     history = model.fit(x_train, y_train, epochs=500, batch_size=64, validation_data=(x_test, y_test))
 
     if is_debug():
-        print(history.history["accuracy"])
-        print(history.history["val_accuracy"])
-        print(history.history["loss"])
-        print(history.history["val_loss"])
-        # plt.figure(figsize=(12, 4))
-        # plt.subplot(1, 2, 1)
-        # plt.plot(history.history['accuracy'])
-        # plt.plot(history.history['val_accuracy'])
-        # plt.title('Model accuracy')
-        # plt.ylabel('Accuracy')
-        # plt.xlabel('Epoch')
-        # plt.legend(['Train', 'Test'], loc='upper left')
-        #
-        # plt.subplot(1, 2, 2)
-        # plt.plot(history.history['loss'])
-        # plt.plot(history.history['val_loss'])
-        # plt.title('Model loss')
-        # plt.ylabel('Loss')
-        # plt.xlabel('Epoch')
-        # plt.legend(['Train', 'Test'], loc='upper left')
-        # plt.tight_layout()
-        # plt.show()
+        # print(history.history["accuracy"])
+        # print(history.history["val_accuracy"])
+        # print(history.history["loss"])
+        # print(history.history["val_loss"])
+        plt.figure(figsize=(12, 4))
+        plt.subplot(1, 2, 1)
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Model accuracy')
+        plt.ylabel('Accuracy')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Test'], loc='upper left')
+
+        plt.subplot(1, 2, 2)
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('Model loss')
+        plt.ylabel('Loss')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Test'], loc='upper left')
+        plt.tight_layout()
+        plt.show()
 
     model.save(settings.get_target_model_path())
 

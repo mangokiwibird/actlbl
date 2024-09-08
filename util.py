@@ -16,6 +16,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
+
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split

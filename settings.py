@@ -65,7 +65,7 @@ def get_target_model_path():
 def get_frames_per_sample():
     """Frames per sample, defaults to 25"""
 
-    return int(os.environ.get("actlbl_frames_per_sample", "51"))
+    return int(os.environ.get("actlbl_frames_per_sample", "9"))
 
 
 def get_max_frames_in_history():
