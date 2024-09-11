@@ -16,6 +16,6 @@ def history_add_padding(list_history):
     return PaddedData(padded_inputs)
 
 
-def create_mask_layer(padded_history: PaddedData): # TODO don't know what this does
+def create_mask_layer(padded_history: PaddedData):  # TODO don't know what this does
     masking_layer = Masking(0.0)
     return masking_layer(padded_history.data)

@@ -5,48 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d881c89-a7e6-4501-8beb-e90f411d7b39" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model/actlbl_model.keras" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/masking.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/test_masking.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subactivity/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subactivity/holy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/better_labeler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/better_labeler.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/labeler/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/labeler/ml_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lying/lying1.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/lying/lying1.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lying/lying2.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/lying/lying2.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lying/lying3.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/lying/lying3.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lying/lying5.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/lying/lying5.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lying/lying6.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/lying/lying6.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/running/running1.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/running/running1.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/running/running2.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/running/running2.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting1.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting1.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting2.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting2.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting3.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting3.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting4.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting4.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting5.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting5.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting6.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting6.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting7.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting7.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/sitting/sitting8.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/sitting/sitting8.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing1.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing1.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing2.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing2.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing3.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing3.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing4.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing4.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing5.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing5.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing6.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing6.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/standing/standing7.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/standing/standing7.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/walking/walking1.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/walking/walking1.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/walking/walking2.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/walking/walking2.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/walking/walking3.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/walking/walking3.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/walking/walking4.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/walking/walking4.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/walking/walking5.mp4.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/walking/walking5.mp4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/masking.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/masking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,21 +35,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_manager.TestManager.test_manager.executor": "Run",
-    "Python tests.Python tests for test_masking.TestMasking.test_masking.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_manager.TestManager.test_manager.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_masking.TestMasking.test_masking.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python tests.Python tests for test_manager.TestManager.test_manager">
     <configuration name="Python tests for test_manager.TestManager.test_manager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="better_labeler" />
@@ -146,7 +108,11 @@
       <updated>1724763275544</updated>
       <workItem from="1724763278392" duration="344000" />
       <workItem from="1724773433597" duration="6124000" />
-      <workItem from="1725807306726" duration="8727000" />
+      <workItem from="1725807306726" duration="8806000" />
+      <workItem from="1725927799521" duration="67000" />
+      <workItem from="1725947669074" duration="3593000" />
+      <workItem from="1726027988422" duration="5202000" />
+      <workItem from="1726048924630" duration="11457000" />
     </task>
     <servers />
   </component>
@@ -154,6 +120,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1725817486035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
+    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1726063268724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
 </project>
