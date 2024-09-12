@@ -18,6 +18,7 @@ import numpy as np
 import tensorflow as tf
 
 from settings import get_model_path
+from vectors import Vector2D
 
 
 # KEYPOINT_GROUP * 2 + (- 1, 0)
@@ -33,7 +34,7 @@ class KeypointGroup(Enum):
     ANKLE = 8
 
 
-class Keypoint(Enum):
+class KeypointType(Enum):
     NOSE = 0
     LEFT_EYE = 1
     RIGHT_EYE = 2
@@ -51,6 +52,18 @@ class Keypoint(Enum):
     RIGHT_KNEE = 14
     LEFT_ANKLE = 15
     RIGHT_ANKLE = 16
+
+
+class Keypoint:
+    def __init__(self, keypoint_type: KeypointType, x: float, y: float, confidence: float):
+        self.keypoint_type = keypoint_type
+        self.x = x
+        self.y = y
+        self.confidence = confidence
+
+    def to_vec(self):
+        return Vector2D(self.x, self.y)
+
 
 KEYPOINT_INDEX_TO_NAME = [
     'nose',
@@ -118,6 +131,12 @@ def load_model():
 
     interpreter = tf.lite.Interpreter(model_path=get_model_path())
     interpreter.allocate_tensors()
+
+
+def objectify_keypoints(keypoints: np.ndarray[any]) -> np.ndarray[Keypoint]:
+    keypoint_list = [Keypoint(KeypointType(idx), kp[1], kp[0], kp[2]) for idx, kp in enumerate(keypoints)]
+
+    return np.array(keypoint_list)
 
 
 def parse_keypoints(image: np.ndarray):

@@ -1,9 +1,5 @@
 import unittest
 
-import numpy as np
-
-from rulebased import sitting
-
 
 class TestSitting(unittest.TestCase):
     pass

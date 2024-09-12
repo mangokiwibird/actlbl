@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 
+import movenet
 from movenet import KeypointGroup
 from rulebased import util
 
@@ -48,6 +49,11 @@ class TestUtility(unittest.TestCase):
             [10, 0, 0],
             [10, 20, 0],
         ])
+
+    def test_center_location(self):
+        center_coords = util.get_center_coords(movenet.objectify_keypoints(self.mock_keypoints_data), KeypointGroup.ANKLE)
+        self.assertEqual(center_coords.x, 0)
+        self.assertEqual(center_coords.y, 10)
 
     def test_distance(self):
         distance = util.calculate_distance(self.mock_keypoints_data, KeypointGroup.NOSE, KeypointGroup.ANKLE)
