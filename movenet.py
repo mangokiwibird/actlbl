@@ -12,29 +12,45 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+from enum import Enum
 
 import numpy as np
 import tensorflow as tf
 
 from settings import get_model_path
 
-KEYPOINT_NOSE = 0
-KEYPOINT_LEFT_EYE = 1
-KEYPOINT_RIGHT_EYE = 2
-KEYPOINT_LEFT_EAR = 3
-KEYPOINT_RIGHT_EAR = 4
-KEYPOINT_LEFT_SHOULDER = 5
-KEYPOINT_RIGHT_SHOULDER = 6
-KEYPOINT_LEFT_ELBOW = 7
-KEYPOINT_RIGHT_ELBOW = 8
-KEYPOINT_LEFT_WRIST = 9
-KEYPOINT_RIGHT_WRIST = 10
-KEYPOINT_LEFT_HIP = 11
-KEYPOINT_RIGHT_HIP = 12
-KEYPOINT_LEFT_KNEE = 13
-KEYPOINT_RIGHT_KNEE = 14
-KEYPOINT_LEFT_ANKLE = 15
-KEYPOINT_RIGHT_ANKLE = 16
+
+# KEYPOINT_GROUP * 2 + (- 1, 0)
+class KeypointGroup(Enum):
+    NOSE = 0
+    EYE = 1
+    EAR = 2
+    SHOULDER = 3
+    ELBOW = 4
+    WRIST = 5
+    HIP = 6
+    KNEE = 7
+    ANKLE = 8
+
+
+class Keypoint(Enum):
+    NOSE = 0
+    LEFT_EYE = 1
+    RIGHT_EYE = 2
+    LEFT_EAR = 3
+    RIGHT_EAR = 4
+    LEFT_SHOULDER = 5
+    RIGHT_SHOULDER = 6
+    LEFT_ELBOW = 7
+    RIGHT_ELBOW = 8
+    LEFT_WRIST = 9
+    RIGHT_WRIST = 10
+    LEFT_HIP = 11
+    RIGHT_HIP = 12
+    LEFT_KNEE = 13
+    RIGHT_KNEE = 14
+    LEFT_ANKLE = 15
+    RIGHT_ANKLE = 16
 
 KEYPOINT_INDEX_TO_NAME = [
     'nose',

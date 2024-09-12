@@ -17,10 +17,7 @@ import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.src.layers import Masking
 from sklearn.model_selection import train_test_split
-
-import tensorflow as tf
 
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout, Input, Embedding

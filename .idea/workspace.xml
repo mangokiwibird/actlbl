@@ -1,95 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d881c89-a7e6-4501-8beb-e90f411d7b39" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/masking.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/masking.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
+    <list default="true" id="c5a623bf-f4a2-4edb-b04c-db357246b361" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/rulebased/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/eating.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/handsup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/jumping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/sitting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/test_sitting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/test_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rulebased/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/better_labeler.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/labeler/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/labeler/ml_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/movenet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-        <option value="Python Unit Test" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2lF62aGEeirXkKnuK47E4bgOTsH" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2lxtxf4VJr7Q2Ssh6qQ1uQTc6vH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests for test_manager.TestManager.test_manager.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_masking.TestMasking.test_masking.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Python tests.Python tests for test_manager.TestManager.test_manager">
-    <configuration name="Python tests for test_manager.TestManager.test_manager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="better_labeler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocessing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_manager.TestManager.test_manager&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_masking.TestMasking.test_masking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="better_labeler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocessing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_masking.TestMasking.test_masking&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python tests.Python tests for test_manager.TestManager.test_manager" />
-        <item itemvalue="Python tests.Python tests for test_masking.TestMasking.test_masking" />
-      </list>
-    </recent_temporary>
-  </component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -101,25 +57,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3d881c89-a7e6-4501-8beb-e90f411d7b39" name="Changes" comment="" />
-      <created>1724763275544</created>
+      <changelist id="c5a623bf-f4a2-4edb-b04c-db357246b361" name="Changes" comment="" />
+      <created>1726133806600</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1724763275544</updated>
-      <workItem from="1724763278392" duration="344000" />
-      <workItem from="1724773433597" duration="6124000" />
-      <workItem from="1725807306726" duration="8806000" />
-      <workItem from="1725927799521" duration="67000" />
-      <workItem from="1725947669074" duration="3593000" />
-      <workItem from="1726027988422" duration="5202000" />
-      <workItem from="1726048924630" duration="11457000" />
+      <updated>1726133806600</updated>
+      <workItem from="1726133807827" duration="172000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1726063268724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
 </project>
