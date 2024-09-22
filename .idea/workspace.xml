@@ -7,7 +7,9 @@
     <list default="true" id="c5a623bf-f4a2-4edb-b04c-db357246b361" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/masking.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/test_masking.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,20 +35,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_manager.TestManager.test_manager.executor": "Run",
-    "Python tests.Python tests for test_util.TestUtility.test_center_location.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_manager.TestManager.test_manager.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_util.TestUtility.test_center_location.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python tests.Python tests for test_manager.TestManager.test_manager">
     <configuration name="Python tests for test_manager.TestManager.test_manager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="better_labeler" />
@@ -106,7 +108,8 @@
       <workItem from="1726133807827" duration="172000" />
       <workItem from="1726134028513" duration="3688000" />
       <workItem from="1726813949227" duration="6000" />
-      <workItem from="1727018038971" duration="5090000" />
+      <workItem from="1727018038971" duration="5168000" />
+      <workItem from="1727046178241" duration="651000" />
     </task>
     <servers />
   </component>
@@ -114,6 +117,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1727023274424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
+    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1727046796328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
 </project>

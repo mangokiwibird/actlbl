@@ -1,10 +1,7 @@
 import unittest
 
 import numpy as np
-from tensorflow.keras.layers import Masking
-
-from preprocessing import masking
-from preprocessing.manager import Manager
+from preprocessing.manager import Manager, history_add_padding
 
 
 class TestManager(unittest.TestCase):
@@ -171,17 +168,13 @@ class TestManager(unittest.TestCase):
                     [[50.0, 20.0, 20.0], [50.0, 30.0, 20.0], [50.0, 40.0, 20.0], [50.0, 50.0, 20.0]],  # 3fr, A
                     [[60.0, 20.0, 20.0], [60.0, 30.0, 20.0], [60.0, 40.0, 20.0], [60.0, 50.0, 20.0]],  # 3fr, A
                     [[70.0, 20.0, 20.0], [70.0, 30.0, 20.0], [70.0, 40.0, 20.0], [70.0, 50.0, 20.0]],  # 3fr, A
-                    [[80.0, 20.0, 20.0], [80.0, 30.0, 20.0], [80.0, 40.0, 20.0], [80.0, 50.0, 20.0]],  # 3fr, A
-                    [[90.0, 20.0, 20.0], [90.0, 30.0, 20.0], [90.0, 40.0, 20.0], [90.0, 50.0, 20.0]],  # 3fr, A
                 ],
                 #
             ]
 
         mock_answers = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]
 
-        padded_data = masking.history_add_padding(mock_testdata)
-
-        manager = Manager(np.array(padded_data.data), np.array(mock_answers))
+        manager = Manager(np.array(history_add_padding(mock_testdata)), np.array(mock_answers))
         manager.generate_model()
 
         self.assertEqual(True, True)  # add assertion here
