@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5a623bf-f4a2-4edb-b04c-db357246b361" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vectors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/movenet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rulebased/eating.py" beforeDir="false" afterPath="$PROJECT_DIR$/rulebased/eating.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rulebased/sitting.py" beforeDir="false" afterPath="$PROJECT_DIR$/rulebased/sitting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rulebased/test_sitting.py" beforeDir="false" afterPath="$PROJECT_DIR$/rulebased/test_sitting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rulebased/test_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/rulebased/test_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rulebased/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/rulebased/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +35,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_manager.TestManager.test_manager.executor": "Run",
     "Python tests.Python tests for test_util.TestUtility.test_center_location.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -52,7 +47,23 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests for test_manager.TestManager.test_manager">
+    <configuration name="Python tests for test_manager.TestManager.test_manager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="better_labeler" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_manager.TestManager.test_manager&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_util.TestUtility.test_center_location" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="better_labeler" />
       <option name="ENV_FILES" value="" />
@@ -71,6 +82,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_manager.TestManager.test_manager" />
         <item itemvalue="Python tests.Python tests for test_util.TestUtility.test_center_location" />
       </list>
     </recent_temporary>
@@ -92,7 +104,9 @@
       <option name="presentableId" value="Default" />
       <updated>1726133806600</updated>
       <workItem from="1726133807827" duration="172000" />
-      <workItem from="1726134028513" duration="3661000" />
+      <workItem from="1726134028513" duration="3688000" />
+      <workItem from="1726813949227" duration="6000" />
+      <workItem from="1727018038971" duration="5090000" />
     </task>
     <servers />
   </component>
@@ -100,6 +114,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1726145106802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rulebased" />
+    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1727023274424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
 </project>
