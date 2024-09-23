@@ -54,21 +54,6 @@ class Manager:
 
         history = model.fit(train_x, train_y, epochs=200, batch_size=10, validation_data=(val_x, val_y))
 
-        # Visualize actual results?
-        res = [model.predict(np.array([data[i]])) for i in range(len(answers))]
-        print(res)
-        for i, x in enumerate(res):
-            x = x[0]
-            y = max(x[0], x[1], x[2], x[3])
-            if y == x[0]:
-                print(0 == answers[i])
-            elif y == x[1]:
-                print(1 == answers[i])
-            elif y == x[2]:
-                print(2 == answers[i])
-            else:
-                print(3 == answers[i])
-
         plt.figure(figsize=(12, 4))
 
         plt.plot(history.history['accuracy'])
@@ -79,3 +64,11 @@ class Manager:
         plt.legend(['TrainA', 'TestA'], loc='upper left')
         plt.tight_layout()
         plt.show()
+
+        res = 0
+
+        for i in range(len(answers)):
+            predict_result = model.predict(np.array([data[i]]), verbose=False)[0].tolist()
+            res += int(predict_result.index(max(predict_result)) == answers[i])
+
+        return res / len(answers)
