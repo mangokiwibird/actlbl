@@ -18,7 +18,7 @@ class Manager:
         self.history_data = history_data  # Note: RAW history data must be given
         self.answers = answers
 
-    def generate_model(self):
+    def predict(self):
         data, answers = self.history_data, self.answers
 
         # Convert python list to numpy

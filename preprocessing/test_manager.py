@@ -175,7 +175,7 @@ class TestManager(unittest.TestCase):
         mock_answers = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]
 
         manager = Manager(np.array(history_add_padding(mock_testdata)), np.array(mock_answers))
-        accuracy = manager.generate_model()
+        accuracy = manager.predict()
 
         print(f"Accuracy: {accuracy}")
 
