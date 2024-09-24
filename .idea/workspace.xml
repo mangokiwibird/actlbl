@@ -6,8 +6,36 @@
   <component name="ChangeListManager">
     <list default="true" id="c5a623bf-f4a2-4edb-b04c-db357246b361" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fs_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/fs_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/labeler/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/labeler/ml_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/lying/lying1.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/lying/lying2.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/lying/lying3.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/lying/lying5.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/lying/lying6.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/running/running1.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/running/running2.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting1.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting2.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting3.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting4.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting5.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting6.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting7.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sitting/sitting8.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing1.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing2.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing3.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing4.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing5.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing6.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/standing/standing7.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/walking/walking1.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/walking/walking2.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/walking/walking3.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/walking/walking4.mp4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/walking/walking5.mp4.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/test_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +136,8 @@
       <workItem from="1726813949227" duration="6000" />
       <workItem from="1727018038971" duration="5168000" />
       <workItem from="1727046178241" duration="4029000" />
-      <workItem from="1727055497629" duration="98000" />
+      <workItem from="1727055497629" duration="914000" />
+      <workItem from="1727073589052" duration="18699000" />
     </task>
     <servers />
   </component>
@@ -116,6 +145,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1727054234322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
+    <SUITE FILE_PATH="coverage/better_labeler$.coverage" NAME=" Coverage Results" MODIFIED="1727145637709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
 </project>

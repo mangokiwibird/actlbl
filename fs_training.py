@@ -8,13 +8,13 @@ from labeler.ml_model import load_dataset, train_labeler
 
 # TODO this code relies on the -ing suffix of an activity <sort of hardcoding?>
 def parse_video_path(video_file: str):
-    raw_split_video_path = video_file.split(".mp4")[0].split("ing")
+    raw_split_video_path = video_file.split(".mp4")[0].split("_")
 
     # validate file name else return None
     if len(raw_split_video_path) != 2 or not raw_split_video_path[1].isdigit():
         return None
 
-    activity_name = raw_split_video_path[0] + "ing"  # standing sitting walking running lying
+    activity_name = raw_split_video_path[0]  # standing sitting walking running lying
     return activity_name
 
 
@@ -22,7 +22,7 @@ def classify_videos(directory: str):
     """
     classifies video paths by its name
     """
-    list_videos = {"running": [], "sitting": [], "walking": [], "standing": [], "lying": []}
+    list_videos = {"idle": [], "lying": [], "running": [], "sitting": [], "standinglying": [], "standingsitting": [], "walking": []}
 
     files = os.listdir(directory)
     for video_file in files:
@@ -44,11 +44,13 @@ def classify_videos(directory: str):
 
 def generate_model_fs():
     classified_history = [
-        load_dataset("./model/running"),
+        # load_dataset("./model/running"),
         load_dataset("./model/lying"),
-        load_dataset("./model/walking"),
+        load_dataset("./model/idle"),
+        # load_dataset("./model/walking"),
         load_dataset("./model/sitting"),
-        load_dataset("./model/standing")
+        # load_dataset("./model/standingsitting"),
+        # load_dataset("./model/standinglying")
     ]
 
     train_labeler(classified_history)
