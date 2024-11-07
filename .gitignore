@@ -1,4 +1,4 @@
-model/movenet_thunder.tflite
+movenet_thunder.tflite
 __pycache__
 venv
 data.json
@@ -6,3 +6,4 @@ dataset/*.mp4
 test_dataset/*.mp4
 yolov8n.pt
 data.jpg
+dataset

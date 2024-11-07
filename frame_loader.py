@@ -1,5 +1,3 @@
-import json
-
 import numpy as np
 
 import settings
@@ -19,14 +17,13 @@ class FrameLoader:
 
     """
 
-    def __init__(self, data_target):
+    def __init__(self):
         """Initializer
 
         Args:
             data_target: The target JSON filename
         """
 
-        self.data_target = data_target
         self.history = []
 
     def save_frame(self, keypoints):
@@ -35,9 +32,5 @@ class FrameLoader:
 
         self.history.append(keypoints)
 
-    def save_data(self):
-        """Saves history data to json file"""
-
-        with open(self.data_target, "w") as outfile:
-            json.dump({"history": np.array(self.history).tolist()}, outfile)
-            print("successfully saved data to file")
+    def get_data(self):
+        return np.array(self.history).tolist()

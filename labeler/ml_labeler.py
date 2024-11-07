@@ -13,14 +13,10 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import json
-
 import numpy as np
 import tensorflow as tf
 import settings
-from frame_loader import FrameLoader
 from labeler.common import Labeler
-from labeler.ml_model import train_labeler, preprocess_data
 
 FRAMES_PER_SAMPLE = settings.get_frames_per_sample()
 
@@ -28,7 +24,7 @@ FRAMES_PER_SAMPLE = settings.get_frames_per_sample()
 class MLBasedLabeler(Labeler):
     """Labels activity using keypoints parsed by movenet."""
 
-    def __init__(self, data_target: str, classified_history=None, model_path: str = None):
+    def __init__(self, model_path: str = None):
         """Initializer
 
         Args:
@@ -37,26 +33,20 @@ class MLBasedLabeler(Labeler):
             classified_history: Data to feed
         """
 
-        super().__init__(data_target)
+        super().__init__()
 
         if model_path is not None:
             self.model = tf.keras.models.load_model(model_path)
-        elif classified_history is not None:
-            self.model = train_labeler(classified_history)
         else:
             self.model = None
 
-    # TODO: implement
-    def get_score(self, keypoints):
-        """Returns dictionary of [action - score]"""
+    def get_score(self):
         if self.model is None:
             raise Exception("Invalid Model. No data fed.")
 
-        flattened_train_data = np.zeros((1, 51 * FRAMES_PER_SAMPLE, 1))  # TODO: remove hardcoding
-        if len(self.history) <= FRAMES_PER_SAMPLE:
-            return {"NO_DATA": 1}
+        if len(self.history) < FRAMES_PER_SAMPLE:
+            return {"PREDICTION": -1, "PROBABILITY": []}
+        
+        predict_result = self.model.predict(np.array([self.history]), verbose=0)[0]
 
-        flattened_train_data[0, :, 0] = preprocess_data(np.array(self.history)[-FRAMES_PER_SAMPLE:]).flatten()
-        self.model.predict(flattened_train_data, verbose=0)
-
-        return {"NO_DATA": 1}
+        return {"PREDICTION": predict_result.index(max(predict_result)), "PROBABILITY": predict_result}

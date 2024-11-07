@@ -18,7 +18,7 @@ import numpy as np
 import tensorflow as tf
 
 from settings import get_model_path
-from vectors import Vector2D
+from util import Vector2D
 
 
 # KEYPOINT_GROUP * 2 + (- 1, 0)
@@ -124,7 +124,7 @@ def filter_not(list_keypoints):
     return index_list
 
 
-def load_model():
+def load_movenet_model():
     """Loads Movenet Model"""
 
     global interpreter
@@ -134,6 +134,10 @@ def load_model():
 
 
 def objectify_keypoints(keypoints: np.ndarray[any]) -> np.ndarray[Keypoint]:
+    """
+    objectify raw keypoints returned from movenet. Converts a list of 17 keypoints (y, x, confidence)
+    """
+
     keypoint_list = [Keypoint(KeypointType(idx), kp[1], kp[0], kp[2]) for idx, kp in enumerate(keypoints)]
 
     return np.array(keypoint_list)

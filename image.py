@@ -16,10 +16,9 @@
 import cv2
 import numpy as np
 
-import movenet
+import movenet_wrapper as movenet_wrapper
 
-from frame_loader import FrameLoader
-from labeler.ml_based import MLBasedLabeler
+from labeler.ml_labeler import MLBasedLabeler
 from timer import Timer
 
 
@@ -39,17 +38,16 @@ class CameraContext:
             Dictionary to save shared variables
     """
 
-    def __init__(self, data_target, model_path: str = None):
+    def __init__(self, model_path: str = None):
         """Initializes a new CameraContext object
 
         Initializes a new labeler, timer and an empty dictionary named "settings", which is used to
         save extra shared data.
         """
 
-        self.ml_labeler = MLBasedLabeler(data_target, model_path=model_path)
+        self.ml_labeler = MLBasedLabeler(model_path)
         self.timer = Timer()
         self.settings = {}
-        self.data_target = data_target
         
         def start_record():
             self.settings["start_record"] = True
@@ -97,7 +95,7 @@ class LabeledImage:
 
         self.raw_image = image
         self.camera_context = camera_context
-        self.keypoints = movenet.parse_keypoints(image)[0][0]
+        self.keypoints = movenet_wrapper.parse_keypoints(image)[0][0]
 
     def record_activity(self):
         """Records activity into json file format"""
@@ -117,7 +115,7 @@ class LabeledImage:
             if movenet_confidence < 0.1:
                 continue
 
-            keypoint_name = movenet.KEYPOINT_INDEX_TO_NAME[keypoint_index]
+            keypoint_name = movenet_wrapper.KEYPOINT_INDEX_TO_NAME[keypoint_index]
             keypoint_coords = {
                 "x": int(keypoint_data[1] * 256),
                 "y": int(keypoint_data[0] * 256),
@@ -138,11 +136,10 @@ class LabeledImage:
                 (0, 255, 0))
 
     def get_activity(self):
-        # self.record_activity()
-        # self.camera_context.ml_labeler.save_frame(self.keypoints) # TODO re
-        # scores = self.camera_context.ml_labeler.get_score(self.keypoints) # TODO re
-        # scores = self.camera_context.rule_based_labeler.get_score(self.keypoints)
-        print("nothing bro!")
+        self.camera_context.ml_labeler.save_frame(self.keypoints)
+        scores = self.camera_context.ml_labeler.get_score()
+        most_likely = scores["PREDICTION"]
+        print(f"Predicted Class : {most_likely}")
 
     def get_subactivity(self):
         pass

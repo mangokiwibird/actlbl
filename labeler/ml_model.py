@@ -13,78 +13,64 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import json
-import os
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
 
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout, Input, Embedding
+from dataset_manager import augment_dataset, load_history_dataset, history_add_padding
+import numpy as np
+from keras.src.utils import to_categorical
+from matplotlib import pyplot as plt
+from sklearn.model_selection import train_test_split
+from keras import Sequential
+
+import tensorflow as tf
+from tensorflow.keras.layers import Conv2D, Dense
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Flatten
 from tensorflow.keras.optimizers import Adam
-from sklearn.preprocessing import MultiLabelBinarizer
 
 import settings
-from preprocessing.manager import history_add_padding, Manager
-from settings import is_debug
 
-# from movenet import filter_not
+def train_model(history_data, labels):
+    data, labels = np.array(history_data), np.array(labels)
 
-FRAME_PER_DATA = settings.get_frames_per_sample()  # Frame refers to a single movenet keypoints list
-TIME_STEPS = 51 * FRAME_PER_DATA  # There are x, y coordinates for each 11 keypoints
-N_FEATURES = 1
+    one_hot_labels = to_categorical(labels, num_classes=len(set(labels)))
 
+    train_x, val_x, train_y, val_y = train_test_split(data, np.array(one_hot_labels), test_size=0.2, random_state=31)
 
-# TODO: 머신러닝 이용해서 외삽 진행합시다.
-def preprocess_data(history: np.ndarray):
-    """Preprocess history data before passing it to the model
-        Args:
-            history: History data to pass
+    model = Sequential([
+        Conv2D(16, 3, padding="same", activation='relu'),
+        MaxPooling2D(),
+        Conv2D(32, 3, padding="same", activation='relu'),
+        MaxPooling2D(),
+        Conv2D(64, 3, padding="same", activation='relu'),
+        MaxPooling2D(),
+        Flatten(),
+        Dense(128, activation='relu'),
+        Dense(len(set(labels)), activation='sigmoid')
+    ])
 
-        Returns:
-            Processed history data
-    """
+    model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+    history = model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(val_x, val_y))
+    model.summary()
 
-    # filtered_indices = filter_not(['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist'])
-    # history = np.delete(history, filtered_indices, axis=1)
-    # history = np.delete(history, [2], axis=2)  # TODO: remove confidence?
+    if settings.is_debug():
+        plt.figure(figsize=(12, 4))
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Accuracy Function')
+        plt.ylabel('Value')
+        plt.xlabel('Epoch')
+        plt.legend(['TrainA', 'TestA'], loc='upper left')
+        plt.tight_layout()
+        plt.show()
 
-    return history
+        tf.keras.utils.plot_model(model, show_shapes=True, to_file='pre_model.png')
 
+    return model
 
-def load_dataset(directory: str):
-    """Loads JSON dataset from given directory
-
-    Converts JSON file into python dictionary.
-
-    Args:
-        directory: Name of the directory containing json files with history data
-    Returns:
-        Dictionary with history data
-    """
-
-    list_dataset = []
-
-    files = os.listdir(directory)
-    for json_dataset_path in files:
-        json_full_path = os.path.join(directory, json_dataset_path)
-        with open(json_full_path, "r") as json_file:
-            json_data = json.load(json_file)
-            history = json_data["history"]
-            history = np.array(history)
-
-            history = preprocess_data(history)
-            print(f"{json_full_path} : {len(history)}")
-
-            list_dataset.append(history)
-    return list_dataset
-
-
-def train_labeler(classified_history):
-    train_data = [history for history_group in classified_history for history in history_group]
-    labels = [group_id for (group_id, history_group) in enumerate(classified_history) for history in history_group]
-    print(labels)
-    manager = Manager(np.array(history_add_padding(train_data)), np.array(labels))
-    accuracy = manager.predict()
-
-    print(f"Accuracy: {accuracy}")
+def generate_model(dataset_directory):
+    history_list, labels = load_history_dataset(dataset_directory)
+    history_list, labels = augment_dataset(history_list, labels)
+    history_list = history_add_padding(history_list)
+    model = train_model(np.array(history_list), np.array(labels))
+    return model

@@ -17,9 +17,7 @@ from typing import Callable
 import cv2
 import numpy as np
 
-import settings
 from image import CameraContext, LabeledImage
-from mjpeg_streamer import MjpegServer, Stream
 
 
 # TODO: is this step required?
@@ -44,26 +42,17 @@ def preprocess_image(
 
     return processed_image
 
-
-def start_local_capture(callback: Callable[[LabeledImage], None]):
-    local_camera = cv2.VideoCapture(0)
-    return start_capture(local_camera, callback)
-
-
-def start_fs_capture(video_path, callback: Callable[[LabeledImage], None], target_path: str, model_path: str = None):
-    fs_capture = cv2.VideoCapture(video_path)
-    return start_capture(fs_capture, callback, target_path=target_path, model_path=model_path)
-
-
 # TODO: fix error when using mp4 files as video source
-def start_capture(video_source, on_frame: Callable[[LabeledImage], None], target_path="data.json", model_path=None):
+def start_capture(video_path, callback: Callable[[LabeledImage], None]=None, model_path=None, exit_callback: Callable[[LabeledImage], None]=None):
     """Initiates the application loop
 
     Starts an infinite loop that accepts images from the local camera. LabeledImage instance
     is created every tick.
     """
+    
+    video_source = cv2.VideoCapture(video_path)
 
-    camera_context = CameraContext(target_path, model_path=model_path)
+    camera_context = CameraContext(model_path=model_path)
 
     # Initialize MJPEG Server
     # TODO: move to a separate function
@@ -77,21 +66,23 @@ def start_capture(video_source, on_frame: Callable[[LabeledImage], None], target
             ret, frame = video_source.read()
 
             labeled_image = LabeledImage(preprocess_image(frame), camera_context)
-            on_frame(labeled_image)
+            if callback is not None:
+                callback(labeled_image)
 
             camera_context.timer.tick_sec()  # increment timer tick
 
             cv2.imshow('frame', labeled_image.raw_image)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
+                if exit_callback is not None:
+                    exit_callback(labeled_image)
                 break
 
             # stream.set_frame(labeled_image.raw_image)
         except Exception as error:
             print(error)
-            camera_context.ml_labeler.save_data()
             break
-
+    
     # server.stop()
     # TODO: MJPEG server stops the whole program when the stop method is called
 
